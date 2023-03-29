@@ -1,9 +1,19 @@
+🎈BDD scenario 1:
+
 GIVEN a fight will be fought between Lew and Harry
-WHEN the fight starts
+WHEN the fight is ready to begin
 THEN the two fighters enter the arena
+AND are presented to the audience by the speaker
 AND the first fighter's name is Lew
 AND the first fighter has a damage per attack of 2
 AND the first fighter's health is 10
 AND the second fighter's name is Harry
 AND the second fighter has a damage per attack of 4
 AND the second fighter's health is 5
+
+Atomic behaviour:
+
+Create a fighter given some params
+
+🎉Lew, DPA: 2, Health: 10
+🎉Harry, DPA: 4, health: 5
