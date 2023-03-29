@@ -1,0 +1,9 @@
+GIVEN a fight will be fought between Lew and Harry
+WHEN the fight starts
+THEN the two fighters enter the arena
+AND the first fighter's name is Lew
+AND the first fighter has a damage per attack of 2
+AND the first fighter's health is 10
+AND the second fighter's name is Harry
+AND the second fighter has a damage per attack of 4
+AND the second fighter's health is 5
