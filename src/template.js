@@ -7,8 +7,8 @@ function createFighter(name, damagePerAttack, health) {
   return fighter;
 }
 
-function announceTheFighters(fighterOne, fighterTwo) {
-  const announcement = `${fighterOne.name} and ${fighterTwo.name} enter the arena!`;
+function announceTheFighters(fighterOne, fighterTwo, startFighter) {
+  const announcement = `${fighterOne.name} and ${fighterTwo.name} enter the arena! ${startFighter.name} may attack first`;
   console.log(announcement);
   return announcement;
 }

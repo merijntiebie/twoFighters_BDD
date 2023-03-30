@@ -6,9 +6,11 @@ const {
   attack,
   announceAttackResult,
 } = require("../../src/template");
+const { start } = require("repl");
 
 let fighterOne;
 let fighterTwo;
+let startFighter;
 let announcement;
 
 Given("a fight will be fought between Lew and Harry", () => {
@@ -16,8 +18,16 @@ Given("a fight will be fought between Lew and Harry", () => {
   fighterTwo = createFighter("Harry", 4, 5);
 });
 
+Given("the first fighter is Lew", () => {
+  startFighter = fighterOne;
+});
+
+Given("the first fighter is Harry", () => {
+  startFighter = fighterTwo;
+});
+
 When("the fight is ready to begin", () => {
-  announcement = announceTheFighters(fighterOne, fighterTwo);
+  announcement = announceTheFighters(fighterOne, fighterTwo, startFighter);
 });
 
 Then("the announcer should say: {string}", (expectedAnnouncement) => {
