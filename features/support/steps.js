@@ -4,6 +4,7 @@ const {
   createFighter,
   announceTheFighters,
   attack,
+  announceAttackResult,
 } = require("../../src/template");
 
 let fighterOne;
@@ -49,8 +50,9 @@ Then("the second fighter's health is 5", () => {
 
 When("Lew attacks Harry", () => {
   attack(fighterOne, fighterTwo);
+  announcement = announceAttackResult(fighterOne, fighterTwo);
 });
 
-Then("Harry's health is now {number}", (expectedHealth) => {
-  assert.equal(fighterTwo.health, expectedHealth);
+Then("Harry's health is now 3", () => {
+  assert.equal(fighterTwo.health, 3);
 });

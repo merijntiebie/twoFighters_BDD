@@ -1,8 +1,8 @@
 function createFighter(name, damagePerAttack, health) {
   const fighter = {
-    name: name,
-    damagePerAttack: damagePerAttack,
-    health: health
+    name,
+    damagePerAttack,
+    health,
   };
   return fighter;
 }
@@ -13,7 +13,20 @@ function announceTheFighters(fighterOne, fighterTwo) {
   return announcement;
 }
 
+function attack(attacker, defender) {
+  // eslint-disable-next-line no-param-reassign
+  defender.health -= attacker.damagePerAttack;
+}
+
+function announceAttackResult(attacker, defender) {
+  const announcement = `${attacker.name} attacks ${defender.name}; ${defender.name} now has ${defender.health} health.`;
+  console.log(announcement);
+  return announcement;
+}
+
 module.exports = {
   createFighter,
   announceTheFighters,
+  attack,
+  announceAttackResult,
 };
