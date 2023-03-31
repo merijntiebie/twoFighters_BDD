@@ -1,23 +1,26 @@
 const assert = require("assert");
 const { Given, When, Then } = require("@cucumber/cucumber");
+const { start } = require("repl");
 const {
   createFighter,
   announceTheFighters,
   attack,
   announceAttackResult,
+  switchRoles,
 } = require("../../src/template");
-const { start } = require("repl");
 
 let fighterOne;
 let fighterTwo;
 let startFighter;
 let announcement;
 
+// readytobeginFeature, attackFeature, turnFeature
 Given("a fight will be fought between Lew and Harry", () => {
   fighterOne = createFighter("Lew", 2, 10);
   fighterTwo = createFighter("Harry", 4, 5);
 });
 
+// readytobeginFeature
 Given("the first fighter is Lew", () => {
   startFighter = fighterOne;
 });
@@ -58,6 +61,7 @@ Then("the second fighter's health is 5", () => {
   assert.equal(fighterTwo.health, 5);
 });
 
+// attackFeature
 When("Lew attacks Harry", () => {
   attack(fighterOne, fighterTwo);
   announcement = announceAttackResult(fighterOne, fighterTwo);
@@ -65,4 +69,50 @@ When("Lew attacks Harry", () => {
 
 Then("Harry's health is now 3", () => {
   assert.equal(fighterTwo.health, 3);
+});
+
+// turnFeature scenario 1
+Given("Lew is the attacker", () => {
+  fighterOne.isAttacker = true;
+});
+
+Given("Harry is the defender", () => {
+  fighterTwo.isAttacker = false;
+});
+
+When("Lew has attacked Harry", () => {
+  attack(fighterOne, fighterTwo);
+  announcement = announceAttackResult(fighterOne, fighterTwo);
+  switchRoles(fighterOne, fighterTwo);
+});
+
+Then("Harry becomes the attacker", () => {
+  assert.equal(fighterTwo.isAttacker, true);
+});
+
+Then("Lew becomes the defender", () => {
+  assert.equal(fighterOne.isAttacker, false);
+});
+
+// turnFeature scenario 2
+Given("Harry is the attacker", () => {
+  fighterTwo.isAttacker = true;
+});
+
+Given("Lew is the defender", () => {
+  fighterOne.isAttacker = false;
+});
+
+When("Harry has attacked Lew", () => {
+  attack(fighterTwo, fighterOne);
+  announcement = announceAttackResult(fighterTwo, fighterOne);
+  switchRoles(fighterOne, fighterTwo);
+});
+
+Then("Lew becomes the attacker", () => {
+  assert.equal(fighterOne.isAttacker, true);
+});
+
+Then("Harry becomes the defender", () => {
+  assert.equal(fighterTwo.isAttacker, false);
 });

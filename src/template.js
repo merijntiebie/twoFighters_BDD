@@ -24,9 +24,17 @@ function announceAttackResult(attacker, defender) {
   return announcement;
 }
 
+function switchRoles(fighterOne, fighterTwo) {
+  // eslint-disable-next-line no-param-reassign
+  fighterOne.isAttacker = !fighterOne.isAttacker;
+  // eslint-disable-next-line no-param-reassign
+  fighterTwo.isAttacker = !fighterTwo.isAttacker;
+}
+
 module.exports = {
   createFighter,
   announceTheFighters,
   attack,
   announceAttackResult,
+  switchRoles,
 };
