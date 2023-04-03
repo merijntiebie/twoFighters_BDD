@@ -31,10 +31,35 @@ function switchRoles(fighterOne, fighterTwo) {
   fighterTwo.isAttacker = !fighterTwo.isAttacker;
 }
 
+function determineWinnerAndLoser(fighterOne, fighterTwo) {
+  let winner;
+  let loser;
+  if (fighterOne.health <= 0) {
+    winner = fighterTwo;
+    loser = fighterOne;
+  }
+  if (fighterTwo.health <= 0) {
+    loser = fighterTwo;
+    winner = fighterOne;
+  }
+  return { winner, loser };
+}
+
+function announceWinner(fighterOne, fighterTwo) {
+  const { winner, loser } = determineWinnerAndLoser(fighterOne, fighterTwo);
+
+  if (winner === undefined) return null;
+
+  const announcement = `${loser.name} has died! ${winner.name} wins!`;
+  console.log(announcement);
+  return announcement;
+}
+
 module.exports = {
   createFighter,
   announceTheFighters,
   attack,
   announceAttackResult,
   switchRoles,
+  announceWinner,
 };

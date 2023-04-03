@@ -1,12 +1,12 @@
 const assert = require("assert");
 const { Given, When, Then } = require("@cucumber/cucumber");
-const { start } = require("repl");
 const {
   createFighter,
   announceTheFighters,
   attack,
   announceAttackResult,
   switchRoles,
+  announceWinner,
 } = require("../../src/template");
 
 let fighterOne;
@@ -115,4 +115,22 @@ Then("Lew becomes the attacker", () => {
 
 Then("Harry becomes the defender", () => {
   assert.equal(fighterTwo.isAttacker, false);
+});
+
+// Win feature
+
+Given("Lews health is {int}", (health) => {
+  fighterOne.health = health;
+});
+
+Given("Harry's health is {int}", (health) => {
+  fighterTwo.health = health;
+});
+
+When("the announcer checks if there is a winner", () => {
+  announcement = announceWinner(fighterOne, fighterTwo);
+});
+
+Then("the announcer should say nothing", () => {
+  assert.equal(announcement, null);
 });
